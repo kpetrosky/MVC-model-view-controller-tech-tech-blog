@@ -59,4 +59,3 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 
-<button id="logout">Log Out</button>
