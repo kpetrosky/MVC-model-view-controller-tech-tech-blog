@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet"  href="./css/jass.css" />
-  <link rel="stylesheet"  href="./css/style.css" />
+  <link rel="stylesheet" href="./css/jass.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 
 
   <title>{{pageTitle}}</title>
@@ -21,25 +21,35 @@
         </a>
       </div>
       <div class="nav-center nav-menu">
-        <a class="nav-item is-tab" href="/">
-          Home
-        </a>
+        <!-- HTML code with template engine syntax (e.g., Handlebars) -->
+
+        <a class="nav-item is-tab" href="/">Home</a>
         {{#if logged_in}}
-        <a class="nav-item is-tab" href="/profile">
-          Dashboard
-        </a>
-        <button id="logout" class="nav-item is-tab">
-          Logout
-        </button>
+        <a class="nav-item is-tab" href="/profile">Dashboard</a>
+        <button id="logout" class="nav-item is-tab">Logout</button>
         {{else}}
-        <a class="nav-item is-tab" href="/login">
-          Login
-        </a>
+        <a class="nav-item is-tab" href="/login">Login</a>
         {{/if}}
-      </div>
-      <div class="nav-right nav-menu">
-        <a class="nav-item is-tab" href="/views/profile.handlebars">
-        </a>
+
+        <!-- Add this script block at the end of the HTML file or include it in a separate JavaScript file -->
+
+        <script>
+          const logout = async () => {
+            const response = await fetch('/api/users/logout', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (response.ok) {
+              document.location.replace('/');
+            } else {
+              alert(response.statusText);
+            }
+          };
+
+          document.querySelector('#logout').addEventListener('click', logout);
+        </script>
+
       </div>
     </nav>
   </header>
